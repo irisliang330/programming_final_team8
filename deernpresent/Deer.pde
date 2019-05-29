@@ -1,18 +1,16 @@
-class Deer{ 
- PImage deer0, deer1,sled;
- float x, y;
- float w = 100, h = 130;
- float shock_time = 60;
- Gift gifts;
- boolean gift_isAlive = true;
- float speed = 1;
- float dropY = y +130;
- PImage gift0;
- boolean isShock = false;
+class Deer { 
+  PImage deer0, deer1, sled;
+  float x, y;
+  float w = 100, h = 130;
+  float shock_time = 60;
+  Gift gifts;
+  boolean gift_isAlive = true;
+  float speed = 1;
+  float dropY = y +130;
+  PImage gift0;
+  boolean isShock = false;
 
-
-  
-  Deer(){
+  Deer() {
     deer0 = loadImage("img/deer0.png");
     deer1 = loadImage("img/deer1.png");
     sled = loadImage("img/sled.png");
@@ -22,64 +20,57 @@ class Deer{
     y = 100;
   }
 
-  void update(){
-    
-    if(upState && y >= 50 && keyPressed == true){
+  void update() {
+
+    if (upState && y >= 50 && keyPressed == true) {
       y -= 60;
       keyPressed = false;
     }
-    if(downState && y <= 150 && keyPressed == true){
+    if (downState && y <= 150 && keyPressed == true) {
       y += 60;
       keyPressed = false;
     }
-    if(rightState && x <= 760 && keyPressed == true){
+    if (rightState && x <= 760 && keyPressed == true) {
       x += 60;
       keyPressed = false;
     }
-    if(leftState && x >= 140 && keyPressed == true){
+    if (leftState && x >= 140 && keyPressed == true) {
       x -= 60;
       keyPressed = false;
     }
-    if(isShock == true){
+    if (isShock == true) {
       shock_time--;
 
-      if(shock_time <= 0){
+      if (shock_time <= 0) {
         isShock = false;
         shock_time = 60;
-
       }
     }
   }
-  
-  void hurt(){
-    
-      isShock = true;
-        
-  }
-  
-  void display(){
-    if(isShock == false){
-      image(deer1,x,y);
-      image(sled,x-100,y+70);
-    }
-    if(isShock == true){
-      image(deer0,x,y);
-      image(sled,x-100,y+70);
-    }
-    textAlign(CENTER,TOP);
-    text(giftHealth,x-50,y+45);
-  }
-  
-  
-  
-  void drop(float x){
-     image(gift0, x+60, dropY);
-     dropY += speed;
-     if(gift_isAlive){
-       giftHealth -= 1;
-       gift_isAlive = false;
-     }
-     
+
+  void hurt() {
+    isShock = true;
   }
 
+  void display() {
+    if (isShock == false) {
+      image(deer1, x, y, 100, 130);
+      image(sled, x-100, y+70, 100, 60);
+    }
+    if (isShock == true) {
+      image(deer0, x, y, 100, 130);
+      image(sled, x-100, y+70, 100, 60);
+    }
+    textAlign(CENTER, TOP);
+    text(giftHealth, x-50, y+45);
+  }
+
+  void drop(float x) {
+    image(gift0, x+60, dropY);
+    dropY += speed;
+    if (gift_isAlive) {
+      giftHealth -= 1;
+      gift_isAlive = false;
+    }
+  }
 }
